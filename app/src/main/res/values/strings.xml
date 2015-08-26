@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LoftMoneyTracker</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="sum">Сумма</string>
+    <string name="title">Название</string>
+</resources>

@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Container.Background">
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_first_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="First Fragment" />
+
+        <Button
+            android:id="@+id/button_second_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Second Fragment" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/buttons_layout" />
+</RelativeLayout>
