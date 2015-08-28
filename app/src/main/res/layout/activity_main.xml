@@ -1,20 +1,13 @@
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/frame_container"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         style="@style/Container.Background">
+        <include layout="@layout/toolbar"/>
 
-        <LinearLayout
-            android:id="@+id/buttons_layout"
-            style="?android:attr/buttonBarStyle"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-    </RelativeLayout>
-</FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/frame_container"
+            xmlns:android="http://schemas.android.com/apk/res/android" />
+</RelativeLayout>
