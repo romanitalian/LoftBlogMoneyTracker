@@ -4,6 +4,8 @@ package com.loftschool.loftmoneytracker;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerLayout();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Expenses())
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ExpensesFragment())
                     .commit();
         }
     }
@@ -50,11 +52,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 Snackbar.make(container, menuItem.getTitle() + " pressed", Snackbar.LENGTH_SHORT).show();
+                drawerNavigation(menuItem);
                 menuItem.setChecked(true);
                 drawerLayout.closeDrawers();
                 return false;
             }
         });
+    }
+
+    private void drawerNavigation(MenuItem menuItem) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (menuItem.getTitle() == getString(R.string.nav_drawer_expenses)) {
+            ft.replace(R.id.frame_container, new ExpensesFragment())
+                    .commit();
+        } if (menuItem.getTitle() == getString(R.string.nav_drawer_categories)) {
+            ft.replace(R.id.frame_container, new CategoriesFragment())
+                    .commit();
+        }
     }
 
 }

@@ -14,7 +14,7 @@
     </style>
 
     <style name="Container.Background">
-        <item name="android:background">@drawable/android_app_back</item>
+        <item name="android:background">@color/primary_material_light</item>
     </style>
 
 </resources>
