@@ -6,4 +6,5 @@
     <dimen name="medium_size">16sp</dimen>
 
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="drawer_header_height">172dp</dimen>
 </resources>
