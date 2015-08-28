@@ -5,4 +5,10 @@
     <string name="action_settings">Settings</string>
     <string name="sum">Сумма</string>
     <string name="title">Название</string>
+    
+    <string name="nav.drawer.expenses">Траты</string>
+    <string name="nav.drawer.categories">Категории</string>
+    <string name="nav.drawer.statistics">Статистика</string>
+    <string name="nav.drawer.settings">Настройки</string>
+
 </resources>

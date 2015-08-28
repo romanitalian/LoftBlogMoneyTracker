@@ -34,6 +34,9 @@ public class Expenses extends Fragment {
         data.add(new Transactions("Telephone", "2000"));
         data.add(new Transactions("T-Shirts", "3000"));
         data.add(new Transactions("Jeans", "1000"));
+        data.add(new Transactions("Snickers", "2000"));
+        data.add(new Transactions("Bar", "3000"));
+        data.add(new Transactions("Cafe", "1000"));
 
         return data;
     }
