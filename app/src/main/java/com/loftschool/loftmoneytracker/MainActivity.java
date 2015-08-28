@@ -12,22 +12,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button firstFragmentButton = (Button) findViewById(R.id.button_first_fragment);
-        Button secondFragmentButton = (Button) findViewById(R.id.button_second_fragment);
 
-        firstFragmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frame, new FirstFragment()).commit();
-            }
-        });
-
-        secondFragmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frame, new SecondFragment()).commit();
-            }
-        });
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Expenses())
+                    .commit();
+        }
     }
 
 }
