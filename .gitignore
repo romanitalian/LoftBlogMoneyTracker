@@ -1,0 +1,30 @@
+#project generated files and folders
+.gradle
+gradle-app.setting
+
+# Intellij project files
+/local.properties
+*.iml
+*.ipr
+*.iws
+.idea/
+.DS_Store
+
+#other stuff
+*.hprof
+
+#build folders
+build/
+/*/build
+
+#generated src files
+/Misc/mask_*x*.png
+
+#generated src folders
+/delfi_ee/src/*
+!/delfi_ee/src/main
+!/delfi_ee/src/res
+
+I# built application files
+*.apk
+*.ap_
