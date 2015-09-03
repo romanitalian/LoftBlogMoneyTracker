@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         if (menuItem.getTitle() == getString(R.string.nav_drawer_expenses)) {
             ft.replace(R.id.frame_container, new ExpensesFragment())
                     .commit();
-        } if (menuItem.getTitle() == getString(R.string.nav_drawer_categories)) {
+        }
+        if (menuItem.getTitle() == getString(R.string.nav_drawer_categories)) {
             ft.replace(R.id.frame_container, new CategoriesFragment())
                     .commit();
         }

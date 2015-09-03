@@ -4,6 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorAccent">@color/buttonAccent</item>
     </style>
 
     <style name="Container">
@@ -14,7 +16,11 @@
     </style>
 
     <style name="Container.Background">
-        <item name="android:background">@color/primary_material_light</item>
+        <item name="android:background">@drawable/android_app_back_main</item>
+    </style>
+
+    <style name="Container.BackgroundDark">
+        <item name="android:background">@drawable/android_app_back</item>
     </style>
 
 </resources>

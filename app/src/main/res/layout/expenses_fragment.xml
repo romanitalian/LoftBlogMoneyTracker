@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     style="@style/Container.Background">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_content"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F7F7F7">
-
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="@dimen/dividerHeight" />
-
-    </LinearLayout>
-</RelativeLayout>
+        android:layout_margin="16dp"
+        android:src="@drawable/abc_btn_rating_star_on_mtrl_alpha"
+        app:layout_anchor="@id/recycler_view_content"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="com.loftschool.loftmoneytracker.ScrollFABBehaviour" />
+</android.support.design.widget.CoordinatorLayout>
