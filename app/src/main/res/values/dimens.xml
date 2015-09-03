@@ -4,4 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="dividerHeight">0.4dp</dimen>
     <dimen name="medium_size">16sp</dimen>
+
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="drawer_header_height">172dp</dimen>
 </resources>

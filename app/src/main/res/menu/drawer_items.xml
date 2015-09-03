@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_expenses"
+            android:title="@string/nav.drawer.expenses"
+            android:checked="true"/>
+        <item
+            android:id="@+id/drawer_categories"
+            android:title="@string/nav.drawer.categories"/>
+        <item
+            android:id="@+id/drawer_statistics"
+            android:title="@string/nav.drawer.statistics"/>
+        <item
+            android:id="@+id/drawer_settings"
+            android:title="@string/nav.drawer.settings"/>
+    </group>
+</menu>
