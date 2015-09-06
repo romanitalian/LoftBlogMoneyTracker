@@ -14,6 +14,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private DrawerLayout drawerLayout;
     private View container;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
     }
+
 
     private void initToolbar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,5 +74,4 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
 }
