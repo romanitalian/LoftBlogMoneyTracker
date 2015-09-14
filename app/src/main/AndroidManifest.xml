@@ -3,12 +3,19 @@
     package="com.loftschool.loftmoneytracker">
 
     <application
+        android:name=".TrackerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+        <meta-data android:name="AA_DB_NAME" android:value="MoneyTrackerDB.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.loftschool.loftmoneytracker.database.Categories,
+            com.loftschool.loftmoneytracker.database.Expenses" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity_"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,10 +23,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AddExpenceActivity_">
+        <activity android:name=".ui.activities.AddExpenceActivity_">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activities.MainActivity" />
         </activity>
     </application>
 

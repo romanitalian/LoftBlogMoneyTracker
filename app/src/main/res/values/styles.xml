@@ -5,22 +5,27 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary</item>
-        <item name="colorAccent">@color/buttonAccent</item>
+        <item name="colorAccent">@color/primary</item>
+    </style>
+
+    <style name="splashScreenTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/moneytracker</item>
     </style>
 
     <style name="Container">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="Container.Background">
-        <item name="android:background">@drawable/android_app_back_main</item>
+        <item name="android:background">@drawable/background_3</item>
     </style>
 
-    <style name="Container.BackgroundDark">
-        <item name="android:background">@drawable/android_app_back</item>
+    <style name="Fragments">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
 </resources>

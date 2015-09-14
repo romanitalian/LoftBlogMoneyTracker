@@ -11,4 +11,30 @@
     <string name="nav.drawer.statistics">Статистика</string>
     <string name="nav.drawer.settings">Настройки</string>
 
+    <string name="add_expenses">Добавить трату</string>
+    <string name="expense.name">Товар</string>
+    <string name="expense.price">Сумма</string>
+    <string name="expense.category">Категория</string>
+    <string name="expense.date">Дата</string>
+    <string name="expense.today">Сегодня</string>
+    <string name="add_expense">Добавить трату</string>
+    <string name="category_text">Category</string>
+    <string name="hint_text_name">Введите наименование</string>
+    <string name="hint_text_sum">Введите сумму</string>
+
+    <string name="category.name">Название</string>
+    <string name="category.date">Дата</string>
+
+    <string name="error_null_price">Введите сумму!</string>
+    <string name="error_null_name">Введите название!</string>
+    <string name="error_input_message">Одно или несколько полей не заполнены!</string>
+
+    <!--Заголовки активити-->
+    <string name="act_title_add_expense">Добавить трату</string>
+
+    <string name="statistics_text">Это фрагмент статистики</string>
+    <string name="settings_text">Это фрагмент настроек</string>
+
+    <string name="header_name">Name Surname</string>
+    <string name="header_email">namesurname@mail.com</string>
 </resources>

@@ -8,4 +8,16 @@
     <dimen name="toolbar_elevation">4dp</dimen>
     <dimen name="drawer_header_height">172dp</dimen>
     <dimen name="medium_padding">20dp</dimen>
+    <dimen name="divider_height_list">1.4dp</dimen>
+    <dimen name="medium_main_text">25sp</dimen>
+    <dimen name="small_main_text">15sp</dimen>
+    <dimen name="drawer_paddingTop">25dp</dimen>
+    <dimen name="avatar_size">64dp</dimen>
+    <dimen name="subtitle_size">56dp</dimen>
+    <dimen name="header_padding_rl">16dp</dimen>
+    <dimen name="header_padding_bottom">8dp</dimen>
+    <dimen name="radius">4dp</dimen>
+    <dimen name="item_margin_top">8dp</dimen>
+    <dimen name="content_height">44dp</dimen>
+    <dimen name="border_margin">10dp</dimen>
 </resources>

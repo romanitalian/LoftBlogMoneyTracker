@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/radius"
     card_view:cardCornerRadius="@dimen/radius"
-    card_view:contentPadding="@dimen/activity_horizontal_margin">
+    card_view:contentPadding="@dimen/activity_horizontal_margin"
+    card_view:cardBackgroundColor="@color/background">
 
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,26 +23,7 @@
                 android:textSize="@dimen/medium_main_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/expense.name"/>
-
-            <TextView
-                android:id="@+id/price_text"
-                android:textSize="@dimen/medium_main_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textStyle="bold"
-                android:text="@string/expense.price"/>
-
-            <TextView
-                android:id="@+id/category_text"
-                android:textSize="@dimen/small_main_text"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/category_name"
-                android:text="@string/category_text"/>
+                android:text="@string/category.name"/>
 
         </RelativeLayout>
 
@@ -64,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/border"
-                android:text="@string/expense.date"/>
+                android:text="@string/category.date"/>
         </RelativeLayout>
 
     </RelativeLayout>

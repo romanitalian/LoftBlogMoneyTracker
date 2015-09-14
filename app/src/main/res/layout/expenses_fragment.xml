@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/abc_btn_rating_star_on_mtrl_alpha"
+        android:src="@drawable/ic_add_white_24dp"
         app:layout_anchor="@id/recycler_view_content"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="com.loftschool.loftmoneytracker.ScrollFABBehaviour" />
+        app:layout_behavior="com.loftschool.loftmoneytracker.utils.ScrollFABBehaviour" />
 </android.support.design.widget.CoordinatorLayout>
