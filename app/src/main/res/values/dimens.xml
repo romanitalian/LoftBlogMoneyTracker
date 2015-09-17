@@ -20,4 +20,8 @@
     <dimen name="item_margin_top">8dp</dimen>
     <dimen name="content_height">44dp</dimen>
     <dimen name="border_margin">10dp</dimen>
+    
+    <!--Margins for RegistrationActivity-->
+    <dimen name="side_margins">70dp</dimen>
+    <dimen name="logo_top_margin">150dp</dimen>
 </resources>

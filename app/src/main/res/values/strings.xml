@@ -37,4 +37,14 @@
 
     <string name="header_name">Name Surname</string>
     <string name="header_email">namesurname@mail.com</string>
+
+    <string name="lbl.registration.login">Enter login you want</string>
+    <string name="lbl.registration.password">Enter password</string>
+    <string name="lbl.button.register">Register Me</string>
+
+    <string name="error.empty.login.field">Введите логин</string>
+    <string name="error.empty.password.field">Введите пароль</string>
+    <string name="error.login.not.available">Логин занят</string>
+    <string name="error.network.access.disabled">Проверьте подключение к сети.</string>
+    <string name="error.server.is.down">Что-то с сервером. Попробуйте пожалуйста позже.</string>
 </resources>
