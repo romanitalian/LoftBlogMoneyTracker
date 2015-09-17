@@ -3,11 +3,9 @@ package com.loftschool.loftmoneytracker.ui.activities;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.loftschool.loftmoneytracker.R;
 import com.loftschool.loftmoneytracker.rest.RestService;
@@ -80,10 +78,12 @@ public class RegistrationActivity extends AppCompatActivity {
      * **/
     private boolean checkIsEmpty() {
         if (etLogin.getText().length() == 0) {
+            this.etLogin.requestFocus();
             etLogin.setError(emptyLoginField);
             return false;
         }
         if (etPassword.getText().length() == 0) {
+            this.etPassword.requestFocus();
             etPassword.setError(emptyPasswordField);
             return false;
         }

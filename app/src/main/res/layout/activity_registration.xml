@@ -36,7 +36,6 @@
         android:inputType="textPassword"
         android:maxLength="14"
         android:id="@+id/etPassword"/>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
