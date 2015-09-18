@@ -47,4 +47,6 @@
     <string name="error.login.not.available">Логин занят</string>
     <string name="error.network.access.disabled">Проверьте подключение к сети.</string>
     <string name="error.server.is.down">Что-то с сервером. Попробуйте пожалуйста позже.</string>
+
+    <string name="msg.registration.success">Вы успешно зарегистрированы</string>
 </resources>

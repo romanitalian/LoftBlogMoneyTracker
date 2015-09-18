@@ -3,6 +3,7 @@ package com.loftschool.loftmoneytracker.ui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -45,6 +46,9 @@ public class ExpensesFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+        Snackbar.make(recyclerView,
+                getResources().getText(R.string.msg_registration_success),
+                Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
