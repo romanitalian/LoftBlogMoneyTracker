@@ -1,5 +1,7 @@
 package com.loftschool.loftmoneytracker.rest;
 
+import com.loftschool.loftmoneytracker.rest.api.AddCategoryAPI;
+import com.loftschool.loftmoneytracker.rest.api.LoginUserAPI;
 import com.loftschool.loftmoneytracker.rest.api.RegisterUserAPI;
 
 import retrofit.RestAdapter;
@@ -12,6 +14,8 @@ public class RestClient {
     private static final String BASE_URL = "http://62.109.17.114";
 
     private RegisterUserAPI registerUserAPI;
+    private LoginUserAPI loginUserAPI;
+    private AddCategoryAPI addCategoryAPI;
 
     public RestClient() {
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -20,9 +24,19 @@ public class RestClient {
                 .build();
 
         registerUserAPI = restAdapter.create(RegisterUserAPI.class);
+        loginUserAPI = restAdapter.create(LoginUserAPI.class);
+        addCategoryAPI = restAdapter.create(AddCategoryAPI.class);
     }
 
     public RegisterUserAPI getRegisterUserAPI() {
         return registerUserAPI;
+    }
+
+    public LoginUserAPI getLoginUserAPI() {
+        return loginUserAPI;
+    }
+
+    public AddCategoryAPI getAddCategoryAPI() {
+        return addCategoryAPI;
     }
 }

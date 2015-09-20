@@ -29,6 +29,9 @@
                 android:value=".ui.activities.MainActivity" />
         </activity>
         <activity android:name=".ui.activities.RegistrationActivity_">
+
+        </activity>
+        <activity android:name=".ui.activities.LoginActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

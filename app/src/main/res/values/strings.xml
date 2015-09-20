@@ -42,6 +42,8 @@
     <string name="lbl.registration.password">Enter password</string>
     <string name="lbl.button.register">Register Me</string>
 
+    <string name="lbl.button.login">Login</string>
+
     <string name="error.empty.login.field">Введите логин</string>
     <string name="error.empty.password.field">Введите пароль</string>
     <string name="error.login.not.available">Логин занят</string>

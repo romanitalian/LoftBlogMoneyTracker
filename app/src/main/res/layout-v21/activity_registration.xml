@@ -24,7 +24,7 @@
         android:inputType="text"
         android:typeface="monospace"
         android:maxLength="10"
-        android:id="@+id/etLogin"/>
+        android:id="@+id/etRegistrationLogin"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
         android:hint="@string/lbl.registration.password"
         android:inputType="textPassword"
         android:maxLength="14"
-        android:id="@+id/etPassword"/>
+        android:id="@+id/etRegistrationPassword"/>
 
     <Button
         android:layout_width="match_parent"

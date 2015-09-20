@@ -29,7 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     LinearLayout rootLayout;
 
     @ViewById
-    EditText etLogin, etPassword;
+    EditText etRegistrationLogin, etRegistrationPassword;
 
     @ViewById
     Button btnRegister;
@@ -52,7 +52,7 @@ public class RegistrationActivity extends AppCompatActivity {
     @Click(R.id.btnRegister)
     void btnRegister() {
         if (checkIsEmpty()) {
-            register(etLogin.getText().toString(), etPassword.getText().toString());
+            register(etRegistrationLogin.getText().toString(), etRegistrationPassword.getText().toString());
         }
     }
 
@@ -64,7 +64,8 @@ public class RegistrationActivity extends AppCompatActivity {
         changeButtonColor(true);
         UserRegisterModel registerResponse;
         if (NetworkStatusChecker.isNetworkAvailable(this)) {
-            registerResponse = RestService.register(login, password);
+            RestService restService = new RestService();
+            registerResponse = restService.register(login, password);
             checkResponseStatus(registerResponse.getStatus());
         } else {
             showErrorMessage(networkAccessDisabled);
@@ -77,14 +78,14 @@ public class RegistrationActivity extends AppCompatActivity {
      * if so - displaying an error.
      * **/
     private boolean checkIsEmpty() {
-        if (etLogin.getText().length() == 0) {
-            this.etLogin.requestFocus();
-            etLogin.setError(emptyLoginField);
+        if (etRegistrationLogin.getText().length() == 0) {
+            this.etRegistrationLogin.requestFocus();
+            etRegistrationLogin.setError(emptyLoginField);
             return false;
         }
-        if (etPassword.getText().length() == 0) {
-            this.etPassword.requestFocus();
-            etPassword.setError(emptyPasswordField);
+        if (etRegistrationPassword.getText().length() == 0) {
+            this.etRegistrationPassword.requestFocus();
+            etRegistrationPassword.setError(emptyPasswordField);
             return false;
         }
 
@@ -113,7 +114,7 @@ public class RegistrationActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                etLogin.setError(loginNotAvailable);
+                etRegistrationLogin.setError(loginNotAvailable);
             }
         });
     }
