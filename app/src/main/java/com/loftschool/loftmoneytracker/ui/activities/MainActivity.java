@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
 import com.activeandroid.query.Select;
 import com.loftschool.loftmoneytracker.ui.fragments.CategoriesFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.ExpensesFragment_;
@@ -14,6 +16,7 @@ import com.loftschool.loftmoneytracker.R;
 import com.loftschool.loftmoneytracker.ui.fragments.SettingsFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.StatisticsFragment_;
 import com.loftschool.loftmoneytracker.database.Categories;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -36,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navView;
 
     @OptionsItem(android.R.id.home)
-    void drawer(){
-        if (drawerLayout.isDrawerOpen(navView)){
+    void drawer() {
+        if (drawerLayout.isDrawerOpen(navView)) {
             drawerLayout.closeDrawers();
-        }else drawerLayout.openDrawer(navView);
+        } else drawerLayout.openDrawer(navView);
     }
 
     @Override
@@ -51,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @AfterViews
-    void ready(){
+    void ready() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         setCategories();
+        ImageView imageView = (ImageView) navView.findViewById(R.id.avatar);
+        Picasso.with(this).load("https://lh5.googleusercontent.com/-VX96XTCVYN4/AAAAAAAAAAI/AAAAAAAAF9o/Dbb8Dh3CV58/photo.jpg").into(imageView);
+//        imageView.setIma
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -67,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private List<Categories> getCategories(){
+    private List<Categories> getCategories() {
         return new Select().from(Categories.class).execute();
     }
 
-    public void setCategories(){
-        if (getCategories().isEmpty()){
+    public void setCategories() {
+        if (getCategories().isEmpty()) {
             new Categories("Food").save();
             new Categories("Stuff").save();
             new Categories("Clothes").save();
