@@ -1,8 +1,13 @@
 package com.loftschool.loftmoneytracker.rest;
 
 import com.loftschool.loftmoneytracker.rest.models.AddCategoryModel;
+import com.loftschool.loftmoneytracker.rest.models.GoogleTokenStatusModel;
 import com.loftschool.loftmoneytracker.rest.models.UserLoginModel;
 import com.loftschool.loftmoneytracker.rest.models.UserRegisterModel;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 /**
@@ -26,7 +31,11 @@ public class RestService {
         return restClient.getLoginUserAPI().loginUser(login, password);
     }
 
-    public AddCategoryModel addCategory(String title, String token) {
-        return restClient.getAddCategoryAPI().addCategory(title, token);
+    public AddCategoryModel addCategory(String title, String gToken, String token) {
+        return restClient.getAddCategoryAPI().addCategory(title, gToken, token);
+    }
+
+    public GoogleTokenStatusModel googleTokenStatusModel(String gToken) {
+        return restClient.getCheckGoogleTokenAPI().googleJson(gToken);
     }
 }

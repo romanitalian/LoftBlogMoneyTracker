@@ -1,24 +1,31 @@
 package com.loftschool.loftmoneytracker.ui.activities;
 
 
+import android.os.Bundle;
+import android.support.annotation.UiThread;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.activeandroid.query.Select;
+import com.loftschool.loftmoneytracker.R;
+import com.loftschool.loftmoneytracker.TrackerApplication;
+import com.loftschool.loftmoneytracker.database.Categories;
+import com.loftschool.loftmoneytracker.rest.RestService;
+import com.loftschool.loftmoneytracker.rest.models.GoogleTokenStatusModel;
 import com.loftschool.loftmoneytracker.ui.fragments.CategoriesFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.ExpensesFragment_;
-import com.loftschool.loftmoneytracker.R;
 import com.loftschool.loftmoneytracker.ui.fragments.SettingsFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.StatisticsFragment_;
-import com.loftschool.loftmoneytracker.database.Categories;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
@@ -29,14 +36,22 @@ import java.util.List;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
+    private RestService restService;
+
     @ViewById
     Toolbar toolbar;
 
     @ViewById(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
+    @ViewById(R.id.user_name)
+    TextView userName;
+
+    @ViewById(R.id.avatar)
+    ImageView imageView;
     @ViewById(R.id.navigation_view)
     NavigationView navView;
+    private String gToken;
 
     @OptionsItem(android.R.id.home)
     void drawer() {
@@ -51,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ExpensesFragment_()).commit();
         }
+        restService = new RestService();
+        gToken = TrackerApplication.getGoogleToken(this);
+        if (!gToken.equalsIgnoreCase("2")) {
+            getGoogleJson();
+        }
     }
 
     @AfterViews
@@ -59,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         setCategories();
-        ImageView imageView = (ImageView) navView.findViewById(R.id.avatar);
-        Picasso.with(this).load("https://lh5.googleusercontent.com/-VX96XTCVYN4/AAAAAAAAAAI/AAAAAAAAF9o/Dbb8Dh3CV58/photo.jpg").into(imageView);
-//        imageView.setIma
+
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -71,6 +89,28 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+//        Picasso.with(this).load(jsonStatus.getPicture()).into(imageView);
+//        userName.setText(jsonStatus.getName());
+    }
+
+    @Background
+    void getGoogleJson() {
+        GoogleTokenStatusModel jsonStatus = restService.googleTokenStatusModel(gToken);
+        Log.e("LINK", jsonStatus.getPicture());
+        Log.e("NAME", jsonStatus.getName());
+        getDataFromGoogle(jsonStatus);
+    }
+
+    @UiThread
+    void getDataFromGoogle(final GoogleTokenStatusModel jsonStatus) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Picasso.with(MainActivity.this).load(jsonStatus.getPicture()).into(imageView);
+                userName.setText(jsonStatus.getName());
+            }
+        });
+
     }
 
     private List<Categories> getCategories() {
