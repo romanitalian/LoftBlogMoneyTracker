@@ -6,8 +6,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+
 import com.activeandroid.query.Select;
+import com.loftschool.loftmoneytracker.TrackerApplication;
+import com.loftschool.loftmoneytracker.rest.RestService;
+import com.loftschool.loftmoneytracker.rest.models.AddCategoryModel;
 import com.loftschool.loftmoneytracker.ui.fragments.CategoriesFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.ExpensesFragment_;
 import com.loftschool.loftmoneytracker.R;
@@ -16,6 +21,7 @@ import com.loftschool.loftmoneytracker.ui.fragments.StatisticsFragment_;
 import com.loftschool.loftmoneytracker.database.Categories;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
@@ -25,6 +31,7 @@ import java.util.List;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
+    private RestService restService;
 
     @ViewById
     Toolbar toolbar;
@@ -36,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navView;
 
     @OptionsItem(android.R.id.home)
-    void drawer(){
-        if (drawerLayout.isDrawerOpen(navView)){
+    void drawer() {
+        if (drawerLayout.isDrawerOpen(navView)) {
             drawerLayout.closeDrawers();
-        }else drawerLayout.openDrawer(navView);
+        } else drawerLayout.openDrawer(navView);
     }
 
     @Override
@@ -48,10 +55,24 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ExpensesFragment_()).commit();
         }
+        restService = new RestService();
+        getCategory();
+    }
+
+    @Background
+    void getCategory() {
+        String authToken = TrackerApplication.getToken(this);
+        String googleToken = TrackerApplication.getGoogleToken(this);
+
+        Log.e("LOG_TAG", " " + authToken + " " + " GToken:" + " " + googleToken);
+
+        AddCategoryModel category = restService.addCategory("Rest", googleToken, authToken);
+        Log.e("LOG_TAG", "Category name: " + category.getData().getTitle()
+                + ", category id: " + category.getData().getId());
     }
 
     @AfterViews
-    void ready(){
+    void ready() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
@@ -67,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private List<Categories> getCategories(){
+    private List<Categories> getCategories() {
         return new Select().from(Categories.class).execute();
     }
 
-    public void setCategories(){
-        if (getCategories().isEmpty()){
+    public void setCategories() {
+        if (getCategories().isEmpty()) {
             new Categories("Food").save();
             new Categories("Stuff").save();
             new Categories("Clothes").save();

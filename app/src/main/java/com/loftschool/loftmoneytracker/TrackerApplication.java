@@ -32,4 +32,17 @@ public class TrackerApplication extends Application implements TokenKeyStorage {
         return settings.getString(TOKEN_KEY, "1");
     }
 
+    public static void setGoogleToken(Context context, String token) {
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(TOKEN_GOOGLE_KEY, token);
+        editor.commit();
+    }
+
+    public static String getGoogleToken(Context context) {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        return settings.getString(TOKEN_GOOGLE_KEY, "2");
+    }
+
 }
