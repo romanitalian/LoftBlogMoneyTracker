@@ -7,6 +7,6 @@
         <item name="colorPrimaryDark">@color/primary</item>
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="actionModeStyle">@style/LywActionMode</item>
+        <item name="actionModeStyle">@style/LoftActionMode</item>
     </style>
 </resources>
