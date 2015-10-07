@@ -26,7 +26,7 @@ public class RestService {
         return restClient.getLoginUserAPI().loginUser(login, password);
     }
 
-    public AddCategoryModel addCategory(String title,  String token) {
-        return restClient.getAddCategoryAPI().addCategory(title, token);
+    public AddCategoryModel addCategory(String title, String gToken, String token) {
+        return restClient.getAddCategoryAPI().addCategory(title, gToken, token);
     }
 }

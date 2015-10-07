@@ -11,7 +11,7 @@ import retrofit.http.Query;
 public interface AddCategoryAPI {
 
     @GET("/categories/add")
-    AddCategoryModel addCategory(@Query("title") String title,
+    AddCategoryModel addCategory(@Query("title") String title, @Query("google_token") String gToken,
                                  @Query("auth_token") String token);
 
 }

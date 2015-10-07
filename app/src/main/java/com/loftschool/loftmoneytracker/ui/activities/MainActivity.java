@@ -6,17 +6,22 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.activeandroid.query.Select;
 import com.loftschool.loftmoneytracker.R;
+import com.loftschool.loftmoneytracker.TrackerApplication;
 import com.loftschool.loftmoneytracker.database.Categories;
+import com.loftschool.loftmoneytracker.rest.RestService;
+import com.loftschool.loftmoneytracker.rest.models.AddCategoryModel;
 import com.loftschool.loftmoneytracker.ui.fragments.CategoriesFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.ExpensesFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.SettingsFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.StatisticsFragment_;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
@@ -26,6 +31,7 @@ import java.util.List;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
+    private RestService restService;
 
     @ViewById
     Toolbar toolbar;
@@ -49,6 +55,18 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ExpensesFragment_()).commit();
         }
+        restService = new RestService();
+        testRest();
+    }
+
+    @Background
+    void testRest() {
+        String authToken = TrackerApplication.getToken(this);
+        String googleToken = TrackerApplication.getGoogleToken(this);
+        Log.e("LOG_TAG", " " + authToken);
+        AddCategoryModel category = restService.addCategory("Rest", googleToken, authToken);
+        Log.e("LOG_TAG", "Category name: " + category.getData().getTitle()
+                + ", category id: " + category.getData().getId());
     }
 
     @AfterViews

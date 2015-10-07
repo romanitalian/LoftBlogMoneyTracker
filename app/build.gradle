@@ -32,6 +32,7 @@ dependencies {
     apt "org.androidannotations:androidannotations:3.3.1"
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.google.android.gms:play-services:7.5.0'
 }
 
 apt {
