@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.loftschool.loftmoneytracker.R;
 import com.loftschool.loftmoneytracker.database.Expenses;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -40,8 +42,48 @@ public class ExpensesAdapter extends SelectableAdapter<ExpensesAdapter.CardViewH
     }
 
     public void removeItem(int position) {
-        expenses.remove(position);
+        removeExpences(position);
         notifyItemRemoved(position);
+    }
+
+    public void removeItems(List<Integer> positions) {
+
+        Collections.sort(positions, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer lhs, Integer rhs) {
+                return rhs - lhs;
+            }
+        });
+
+        while (!positions.isEmpty()) {
+            if (positions.size() == 1) {
+                removeItem(positions.get(0));
+                positions.remove(0);
+            } else {
+                int count = 1;
+                while (positions.size() > count) {
+                    count++;
+                }
+                removeRange(positions.get(count - 1), count);
+                for (int i = 0; i < count; ++i) {
+                    positions.remove(0);
+                }
+            }
+        }
+    }
+
+    private void removeExpences(int position) {
+        if (expenses.get(position) != null) {
+            expenses.get(position).delete();
+            expenses.remove(position);
+        }
+    }
+
+    private void removeRange(int positionStart, int itemCount) {
+        for (int position = 0; position < itemCount; position++) {
+            removeExpences(positionStart);
+        }
+        notifyItemRangeRemoved(positionStart, itemCount);
     }
 
     @Override

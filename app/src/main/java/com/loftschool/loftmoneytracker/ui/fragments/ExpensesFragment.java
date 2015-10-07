@@ -145,7 +145,7 @@ public class ExpensesFragment extends Fragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_remove:
-                    adapter.removeItem(adapter.getItemCount());
+                    adapter.removeItems(adapter.getSelectedItems());
 //                    Transaction.delete(Transaction.class, adapter.getSelectedItemCount());
                     mode.finish();
                     return true;
