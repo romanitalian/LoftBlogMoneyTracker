@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/radius"
-    card_view:cardCornerRadius="@dimen/radius"
-    card_view:contentPadding="@dimen/activity_horizontal_margin">
+    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="@dimen/radius">
 
-    <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin">
 
         <RelativeLayout
             android:id="@+id/container"
@@ -19,54 +20,60 @@
 
             <TextView
                 android:id="@+id/category_name"
-                android:textSize="@dimen/medium_main_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/expense.name"/>
+                android:text="@string/expense.name"
+                android:textSize="@dimen/medium_main_text" />
 
             <TextView
                 android:id="@+id/price_text"
-                android:textSize="@dimen/medium_main_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:textStyle="bold"
-                android:text="@string/expense.price"/>
+                android:text="@string/expense.price"
+                android:textSize="@dimen/medium_main_text"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/category_text"
-                android:textSize="@dimen/small_main_text"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/category_name"
-                android:text="@string/category_text"/>
+                android:text="@string/category_text"
+                android:textSize="@dimen/small_main_text"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
-        <RelativeLayout android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/container">
 
             <RelativeLayout
                 android:id="@+id/border"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/border_margin"
-                android:layout_marginBottom="@dimen/item_margin_top"
                 android:layout_height="@dimen/divider_height_list"
-                android:background="@color/silver"/>
+                android:layout_marginBottom="@dimen/item_margin_top"
+                android:layout_marginTop="@dimen/border_margin"
+                android:background="@color/silver" />
 
             <TextView
                 android:id="@+id/category_date"
-                android:textSize="@dimen/small_main_text"
-                android:textStyle="italic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/border"
-                android:text="@string/expense.date"/>
+                android:text="@string/expense.date"
+                android:textSize="@dimen/small_main_text"
+                android:textStyle="italic" />
         </RelativeLayout>
-
     </RelativeLayout>
 
+    <View
+        android:id="@+id/selected_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_selected"
+        android:visibility="invisible" />
 </android.support.v7.widget.CardView>

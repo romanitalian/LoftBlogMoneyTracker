@@ -14,7 +14,6 @@ import com.loftschool.loftmoneytracker.R;
 import com.loftschool.loftmoneytracker.TrackerApplication;
 import com.loftschool.loftmoneytracker.database.Categories;
 import com.loftschool.loftmoneytracker.rest.RestService;
-import com.loftschool.loftmoneytracker.rest.models.AddCategoryModel;
 import com.loftschool.loftmoneytracker.ui.fragments.CategoriesFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.ExpensesFragment_;
 import com.loftschool.loftmoneytracker.ui.fragments.SettingsFragment_;
@@ -64,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
         String authToken = TrackerApplication.getToken(this);
         String googleToken = TrackerApplication.getGoogleToken(this);
         Log.e("LOG_TAG", " " + authToken);
-        AddCategoryModel category = restService.addCategory("Rest", googleToken, authToken);
-        Log.e("LOG_TAG", "Category name: " + category.getData().getTitle()
-                + ", category id: " + category.getData().getId());
+//        AddCategoryModel category = restService.addCategory("Rest", googleToken, authToken);
+//        Log.e("LOG_TAG", "Category name: " + category.getData().getTitle()
+//                + ", category id: " + category.getData().getId());
     }
 
     @AfterViews

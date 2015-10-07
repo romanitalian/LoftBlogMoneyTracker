@@ -1,13 +1,20 @@
 package com.loftschool.loftmoneytracker.ui.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 import com.loftschool.loftmoneytracker.R;
@@ -37,11 +44,11 @@ public class CategoriesFragment extends Fragment {
 
     @Click
     void fab() {
-        Snackbar.make(recyclerView, "pressed", Snackbar.LENGTH_SHORT).show();
+        alertDialog();
     }
 
     @AfterViews
-    void ready(){
+    void ready() {
         getActivity().setTitle(getResources().getString(R.string.nav_drawer_categories));
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -59,11 +66,11 @@ public class CategoriesFragment extends Fragment {
             public Loader<List<Categories>> onCreateLoader(int id, Bundle args) {
                 final android.support.v4.content.AsyncTaskLoader<List<Categories>> loader =
                         new android.support.v4.content.AsyncTaskLoader<List<Categories>>(getActivity()) {
-                    @Override
-                    public List<Categories> loadInBackground() {
-                        return getDataList();
-                    }
-                };
+                            @Override
+                            public List<Categories> loadInBackground() {
+                                return getDataList();
+                            }
+                        };
                 loader.forceLoad();
                 return loader;
             }
@@ -80,7 +87,39 @@ public class CategoriesFragment extends Fragment {
         });
     }
 
-    private List<Categories> getDataList(){
+    private List<Categories> getDataList() {
         return new Select().from(Categories.class).execute();
+    }
+
+    private void alertDialog() {
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_category);
+        TextView title = (TextView) dialog.findViewById(R.id.title);
+        title.setText("Введите категорию");
+        EditText editText = (EditText) dialog.findViewById(R.id.edittext);
+        final Editable text = editText.getText();
+
+        Button okButton = (Button) dialog.findViewById(R.id.okButton);
+        Button cancelButton = (Button) dialog.findViewById(R.id.cancelButton);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), text.toString(), Toast.LENGTH_LONG).show();
+                Log.e("LOG_TAG", text.toString());
+                dialog.dismiss();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
+
     }
 }
