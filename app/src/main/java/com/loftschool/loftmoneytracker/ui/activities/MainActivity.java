@@ -1,11 +1,14 @@
 package com.loftschool.loftmoneytracker.ui.activities;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -54,8 +57,21 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ExpensesFragment_()).commit();
         }
+        setupWindowAnimations();
         restService = new RestService();
         testRest();
+    }
+
+    private void setupWindowAnimations() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Fade fade = new Fade();
+            fade.setDuration(1000);
+            getWindow().setEnterTransition(fade);
+
+            Slide slide = new Slide();
+            slide.setDuration(1000);
+            getWindow().setReturnTransition(slide);
+        }
     }
 
     @Background

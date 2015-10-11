@@ -1,9 +1,9 @@
 package com.loftschool.loftmoneytracker.ui.activities;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
+import android.transition.Slide;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,12 +21,10 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 
-import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Andrew on 04.09.2015.
@@ -55,16 +53,30 @@ public class AddExpenceActivity extends AppCompatActivity {
     String nullNameError;
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setupWindowAnimations();
+    }
+
+    private void setupWindowAnimations() {
+        Slide fade = new Slide();
+        fade.setDuration(2000);
+        getWindow().setEnterTransition(fade);
+
+
+    }
+
     @StringRes(R.string.error_input_message)
     String errorMessage;
 
     @OptionsItem(android.R.id.home)
-    void back(){
+    void back() {
         onBackPressed();
     }
 
     @AfterViews
-    void ready(){
+    void ready() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.add_expenses));
@@ -74,11 +86,11 @@ public class AddExpenceActivity extends AppCompatActivity {
         spCategories.setAdapter(adapter);
     }
 
-    private List<Categories> getCategories(){
+    private List<Categories> getCategories() {
         return new Select().from(Categories.class).execute();
     }
 
-    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols(){
+    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols() {
 
         @Override
         public String[] getMonths() {
@@ -89,22 +101,22 @@ public class AddExpenceActivity extends AppCompatActivity {
     };
 
     @Click(R.id.add_expense_button)
-    public  void addExpenseButton(){
-        if (etName.getText().length() == 0 || etPrice.getText().length() == 0){
+    public void addExpenseButton() {
+        if (etName.getText().length() == 0 || etPrice.getText().length() == 0) {
             etPrice.setError(nullPriceError);
             etName.setError(nullNameError);
-            Toast.makeText(this,"Не все поля заполнены!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Не все поля заполнены!", Toast.LENGTH_SHORT).show();
         } else {
             new Expenses(
                     etName.getText().toString(),
                     etPrice.getText().toString(),
                     String.valueOf(dateFormat.format(new Date())),
-                    (Categories)spCategories.getSelectedItem()).save();
+                    (Categories) spCategories.getSelectedItem()).save();
 
-            Toast.makeText(this,"Трата добавлена: "+
-                            etName.getText().toString()+", "+
-                            etPrice.getText().toString()+", "+
-                            spCategories.getSelectedItem().toString()+", "+
+            Toast.makeText(this, "Трата добавлена: " +
+                            etName.getText().toString() + ", " +
+                            etPrice.getText().toString() + ", " +
+                            spCategories.getSelectedItem().toString() + ", " +
                             String.valueOf(dateFormat.format(new Date())),
                     Toast.LENGTH_SHORT).show();
 

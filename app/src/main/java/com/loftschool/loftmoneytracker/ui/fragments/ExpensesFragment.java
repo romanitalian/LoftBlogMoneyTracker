@@ -47,6 +47,7 @@ public class ExpensesFragment extends Fragment {
         getActivity().startActivity(openActivityIntent);
     }
 
+
     @AfterViews
     public void ready() {
         getActivity().setTitle(getResources().getString(R.string.nav_drawer_expenses));
