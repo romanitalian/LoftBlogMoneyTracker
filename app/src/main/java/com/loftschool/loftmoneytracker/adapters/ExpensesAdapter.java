@@ -1,9 +1,13 @@
 package com.loftschool.loftmoneytracker.adapters;
 
+import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.loftschool.loftmoneytracker.R;
@@ -19,6 +23,8 @@ import java.util.List;
 public class ExpensesAdapter extends SelectableAdapter<ExpensesAdapter.CardViewHolder> {
     private List<Expenses> expenses;
     private CardViewHolder.ClickListener clickListener;
+    private int lastPosition = -1;
+    private Context context;
 
     public ExpensesAdapter(List<Expenses> expenses, CardViewHolder.ClickListener clickListener) {
         this.expenses = expenses;
@@ -28,6 +34,7 @@ public class ExpensesAdapter extends SelectableAdapter<ExpensesAdapter.CardViewH
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        context = parent.getContext();
         return new CardViewHolder(itemView, clickListener);
     }
 
@@ -39,9 +46,10 @@ public class ExpensesAdapter extends SelectableAdapter<ExpensesAdapter.CardViewH
         holder.date.setText(expense.date);
         holder.category.setText(expense.category.toString());
         holder.selectedOverlay.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+        setAnimation(holder.cardView, position);
     }
 
-    private void removeItem(int position) {
+    public void removeItem(int position) {
         removeExpences(position);
         notifyItemRemoved(position);
     }
@@ -85,9 +93,20 @@ public class ExpensesAdapter extends SelectableAdapter<ExpensesAdapter.CardViewH
         notifyItemRangeChanged(positionStart, itemCount);
     }
 
+
     @Override
     public int getItemCount() {
         return expenses.size();
+    }
+
+    private void setAnimation(View viewToAnimate, int position) {
+        if (position > lastPosition) {
+            if (context != null) {
+                Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_up);
+                viewToAnimate.startAnimation(animation);
+                lastPosition = position;
+            }
+        }
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -96,6 +115,7 @@ public class ExpensesAdapter extends SelectableAdapter<ExpensesAdapter.CardViewH
         protected TextView date;
         protected TextView category;
         protected View selectedOverlay;
+        protected CardView cardView;
         private ClickListener clickListener;
 
         public CardViewHolder(View itemView, ClickListener clickListener) {
@@ -105,6 +125,7 @@ public class ExpensesAdapter extends SelectableAdapter<ExpensesAdapter.CardViewH
             date = (TextView) itemView.findViewById(R.id.category_date);
             category = (TextView) itemView.findViewById(R.id.category_text);
             selectedOverlay = itemView.findViewById(R.id.selected_overlay);
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
             this.clickListener = clickListener;
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

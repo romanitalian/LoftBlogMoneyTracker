@@ -6,4 +6,7 @@
     <color name="background">#F7F7F7</color>
     <color name="buttonAccent">#E91E63</color>
     <color name="silver">#bababa</color>
+    <color name="green_refresh">#00FF00</color>
+    <color name="orange">#FFA500</color>
+    <color name="blue">#0000FF</color>
 </resources>

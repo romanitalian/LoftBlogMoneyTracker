@@ -7,12 +7,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 import com.loftschool.loftmoneytracker.R;
@@ -34,17 +37,24 @@ import java.util.List;
 public class ExpensesFragment extends Fragment {
     private ActionModeCallback actionModeCallback = new ActionModeCallback();
     private ActionMode actionMode;
+
     @ViewById(R.id.recycler_view_content)
     RecyclerView recyclerView;
 
     @ViewById(R.id.fab)
     FloatingActionButton fab;
+
+    @ViewById(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout msSwipeRefreshLayout;
+
     private ExpensesAdapter adapter;
 
     @Click
     public void fab() {
         Intent openActivityIntent = new Intent(getActivity(), AddExpenceActivity_.class);
         getActivity().startActivity(openActivityIntent);
+        getActivity().overridePendingTransition(R.anim.from_middle, R.anim.to_middle);
+
     }
 
 
@@ -58,6 +68,14 @@ public class ExpensesFragment extends Fragment {
         Snackbar.make(recyclerView,
                 getResources().getText(R.string.msg_registration_success),
                 Snackbar.LENGTH_SHORT).show();
+
+        msSwipeRefreshLayout.setColorSchemeColors(R.color.green_refresh, R.color.orange, R.color.blue);
+        msSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+            }
+        });
+
     }
 
     @Override
@@ -79,6 +97,7 @@ public class ExpensesFragment extends Fragment {
 
             @Override
             public void onLoadFinished(Loader<List<Expenses>> loader, List<Expenses> data) {
+                msSwipeRefreshLayout.setRefreshing(false);
                 adapter = (new ExpensesAdapter(getDataList(), new ExpensesAdapter.CardViewHolder.ClickListener() {
                     @Override
                     public void onItemClicked(int position) {
@@ -104,6 +123,23 @@ public class ExpensesFragment extends Fragment {
             public void onLoaderReset(Loader<List<Expenses>> loader) {
             }
         });
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(getActivity(), "Removed" + target, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                adapter.removeItem(viewHolder.getAdapterPosition());
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
 
     private void toogleSelection(int position) {
@@ -120,6 +156,7 @@ public class ExpensesFragment extends Fragment {
     private List<Expenses> getDataList() {
         return new Select().from(Expenses.class).execute();
     }
+
 
     private class ActionModeCallback implements ActionMode.Callback {
 

@@ -48,5 +48,4 @@ public abstract class SelectableAdapter<VH extends RecyclerView.ViewHolder> exte
         }
         return items;
     }
-
 }
