@@ -3,7 +3,6 @@ package com.loftschool.loftmoneytracker.ui.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -56,16 +55,8 @@ public class AddExpenceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupWindowAnimations();
     }
 
-    private void setupWindowAnimations() {
-        Slide fade = new Slide();
-        fade.setDuration(2000);
-        getWindow().setEnterTransition(fade);
-
-
-    }
 
     @StringRes(R.string.error_input_message)
     String errorMessage;
