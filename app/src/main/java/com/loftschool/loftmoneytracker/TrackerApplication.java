@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.app.Application;
+import com.loftschool.loftmoneytracker.sync.TrackerSyncAdapter;
 import com.loftschool.loftmoneytracker.utils.TokenKeyStorage;
 
 /**
@@ -17,6 +18,7 @@ public class TrackerApplication extends Application implements TokenKeyStorage {
     public void onCreate() {
         super.onCreate();
         ActiveAndroid.initialize(this);
+        TrackerSyncAdapter.initializeSyncAdapter(this);
     }
 
     public static void setToken(Context context, String token) {
