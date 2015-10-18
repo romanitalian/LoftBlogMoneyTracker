@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">LoftMoneyTracker</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="sum">Сумма</string>
+    <string name="title">Название</string>
+    
+    <string name="nav.drawer.expenses">Траты</string>
+    <string name="nav.drawer.categories">Категории</string>
+    <string name="nav.drawer.statistics">Статистика</string>
+    <string name="nav.drawer.settings">Настройки</string>
+
+    <string name="add_expenses">Добавить трату</string>
+    <string name="expense.name">Товар</string>
+    <string name="expense.price">Сумма</string>
+    <string name="expense.category">Категория</string>
+    <string name="expense.date">Дата</string>
+    <string name="expense.today">Сегодня</string>
+    <string name="add_expense">Добавить трату</string>
+    <string name="category_text">Category</string>
+    <string name="hint_text_name">Введите наименование</string>
+    <string name="hint_text_sum">Введите сумму</string>
+
+    <string name="category.name">Название</string>
+    <string name="category.date">Дата</string>
+
+    <string name="error_null_price">Введите сумму!</string>
+    <string name="error_null_name">Введите название!</string>
+    <string name="error_input_message">Одно или несколько полей не заполнены!</string>
+
+    <!--Заголовки активити-->
+    <string name="act_title_add_expense">Добавить трату</string>
+
+    <string name="statistics_text">Это фрагмент статистики</string>
+    <string name="settings_text">Это фрагмент настроек</string>
+
+    <string name="header_name">Name Surname</string>
+    <string name="header_email">namesurname@mail.com</string>
+
+    <string name="lbl.registration.login">Enter login you want</string>
+    <string name="lbl.registration.password">Enter password</string>
+    <string name="lbl.button.register">Register Me</string>
+
+    <string name="lbl.button.login">Login</string>
+
+    <string name="error.empty.login.field">Введите логин</string>
+    <string name="error.empty.password.field">Введите пароль</string>
+    <string name="error.login.not.available">Логин занят</string>
+    <string name="error.network.access.disabled">Проверьте подключение к сети.</string>
+    <string name="error.server.is.down">Что-то с сервером. Попробуйте пожалуйста позже.</string>
+
+    <string name="msg.registration.success">Вы успешно зарегистрированы</string>
+    <string name="delete">delete</string>
+</resources>
