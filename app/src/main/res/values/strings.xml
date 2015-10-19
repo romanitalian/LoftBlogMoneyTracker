@@ -58,4 +58,7 @@
 
     <string name="msg.registration.success">Вы успешно зарегистрированы</string>
     <string name="delete">delete</string>
+
+    <string name="search_label">Search</string>
+
 </resources>

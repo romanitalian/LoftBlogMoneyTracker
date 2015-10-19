@@ -108,8 +108,8 @@ public class AddExpenceActivity extends AppCompatActivity {
             Toast.makeText(this, "Не все поля заполнены!", Toast.LENGTH_SHORT).show();
         } else {
             new Expenses(
-                    etName.getText().toString(),
                     etPrice.getText().toString(),
+                    etName.getText().toString(),
                     String.valueOf(dateFormat.format(new Date())),
                     (Categories) spCategories.getSelectedItem()).save();
 

@@ -13,8 +13,10 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
@@ -24,9 +26,13 @@ import com.loftschool.loftmoneytracker.database.Expenses;
 import com.loftschool.loftmoneytracker.ui.activities.AddExpenceActivity_;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.api.BackgroundExecutor;
 
 import java.util.List;
 
@@ -34,7 +40,12 @@ import java.util.List;
  * Created by Andrew on 26.08.2015.
  */
 @EFragment(R.layout.expenses_fragment)
+@OptionsMenu(R.menu.menu_search)
 public class ExpensesFragment extends Fragment {
+
+    private static final String LOG_TAG = ExpensesFragment.class.getSimpleName();
+    private static final String FILTER_TIMER = "filter_id";
+
     private ActionModeCallback actionModeCallback = new ActionModeCallback();
     private ActionMode actionMode;
 
@@ -46,6 +57,9 @@ public class ExpensesFragment extends Fragment {
 
     @ViewById(R.id.swipeRefreshLayout)
     SwipeRefreshLayout msSwipeRefreshLayout;
+
+    @OptionsMenuItem(R.id.menu_search)
+    MenuItem menuSearch;
 
     private ExpensesAdapter adapter;
 
@@ -81,6 +95,56 @@ public class ExpensesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        loadData("");
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(getActivity(), "Removed" + target, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                adapter.removeItem(viewHolder.getAdapterPosition());
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        final SearchView searchView = (SearchView) menuSearch.getActionView();
+        searchView.setQueryHint(getString(R.string.search_label));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(LOG_TAG, "Search action detected: " + newText);
+                BackgroundExecutor.cancelAll(FILTER_TIMER, true);
+                filterDelayed(newText);
+                return false;
+            }
+        });
+    }
+
+    @Background(delay = 300, id = FILTER_TIMER)
+    void filterDelayed(String filter) {
+        loadData(filter);
+    }
+
+    private void loadData(final String filter) {
         getLoaderManager().restartLoader(0, null, new LoaderManager.LoaderCallbacks<List<Expenses>>() {
             @Override
             public Loader<List<Expenses>> onCreateLoader(int id, Bundle args) {
@@ -88,7 +152,7 @@ public class ExpensesFragment extends Fragment {
                         new android.support.v4.content.AsyncTaskLoader<List<Expenses>>(getActivity()) {
                             @Override
                             public List<Expenses> loadInBackground() {
-                                return getDataList();
+                                return getDataList(filter);
                             }
                         };
                 loader.forceLoad();
@@ -98,7 +162,7 @@ public class ExpensesFragment extends Fragment {
             @Override
             public void onLoadFinished(Loader<List<Expenses>> loader, List<Expenses> data) {
                 msSwipeRefreshLayout.setRefreshing(false);
-                adapter = (new ExpensesAdapter(getDataList(), new ExpensesAdapter.CardViewHolder.ClickListener() {
+                adapter = (new ExpensesAdapter(data, new ExpensesAdapter.CardViewHolder.ClickListener() {
                     @Override
                     public void onItemClicked(int position) {
                         if (actionMode != null) {
@@ -124,22 +188,6 @@ public class ExpensesFragment extends Fragment {
             }
         });
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                Toast.makeText(getActivity(), "Removed" + target, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                adapter.removeItem(viewHolder.getAdapterPosition());
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-
     }
 
     private void toogleSelection(int position) {
@@ -153,8 +201,12 @@ public class ExpensesFragment extends Fragment {
         }
     }
 
-    private List<Expenses> getDataList() {
-        return new Select().from(Expenses.class).execute();
+    private List<Expenses> getDataList(String filter) {
+        return new Select()
+                .from(Expenses.class)
+                .where("name LIKE ?", new String[]{'%' + filter + '%'})
+                .orderBy("date DESC")
+                .execute();
     }
 
 
