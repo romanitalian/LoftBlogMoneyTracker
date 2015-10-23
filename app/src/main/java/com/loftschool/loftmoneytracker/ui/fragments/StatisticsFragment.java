@@ -1,8 +1,8 @@
 package com.loftschool.loftmoneytracker.ui.fragments;
 
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
 
+import com.loftschool.loftmoneytracker.PieChartView;
 import com.loftschool.loftmoneytracker.R;
 
 import org.androidannotations.annotations.AfterViews;
@@ -15,12 +15,14 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.statistics_fragment)
 public class StatisticsFragment extends Fragment {
 
-    @ViewById(R.id.statistic_textview)
-    TextView textView;
+    float[] datapoints = {450, 1230, 200, 400, 500};
+
+    @ViewById(R.id.piechart)
+    PieChartView pieChartView;
 
     @AfterViews
-    void ready(){
+    void ready() {
         getActivity().setTitle(getResources().getString(R.string.nav_drawer_statistics));
-        textView.setText(getResources().getString(R.string.statistics_text));
+        pieChartView.setDatapoints(datapoints);
     }
 }

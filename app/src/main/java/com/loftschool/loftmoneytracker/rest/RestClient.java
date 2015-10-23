@@ -12,7 +12,7 @@ import retrofit.RestAdapter;
  */
 public class RestClient {
 
-    private static final String BASE_URL = "http://62.109.17.114";
+    private static final String BASE_URL = "http://lmt.loftblog.tmweb.ru/";
 
     private RegisterUserAPI registerUserAPI;
     private LoginUserAPI loginUserAPI;

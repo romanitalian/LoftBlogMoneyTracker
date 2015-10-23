@@ -24,6 +24,7 @@
 
         <activity
             android:name=".ui.activities.MainActivity_"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name" />
 
         <activity android:name=".ui.activities.AddExpenceActivity_">
